@@ -44,32 +44,38 @@ class DceClient(requests.Session):
         path = '/dce/tenants/{}'.format('u' + user_id)
         result = self.get(path)
         if result.status_code == 200:
-            if self.delete(path, params={'force': True}).status_code == 200:
-                logging.debug("Tenant:{} delete successfully".format('u' + user_id))
+            result = self.delete(path, params={'Force': True})
+            if result.status_code == 200:
+                logging.info("Tenant:{} delete successfully".format('u' + user_id))
                 return True
-            else:
-                return False
+        else:
+            logging.info("Tenant:{} doesn't exist!".format('u' + user_id))
+            return False
 
-    def remove_team(self, user_id):
+    def remove_team(self, team_name):
         """
         remove the dce team if team existed
 
-        :param user_id:
+        :type team_name: object
         :return:
         """
+        team_id = None
 
         team_result = self.get('/dce/teams', params={'All': True})
-        team_id = list(item.get("Id") for item in team_result.json() if item.get('Name') == user_id)[0]
+        for item in team_result.json():
+            if item.get('Name') == team_name:
+                team_id = item.get('Id')
+                break
 
         path = '/dce/teams/{}'.format(team_id)
         result = self.get(path)
         if result.status_code == 200:
-            logging.debug(result.json())
             if self.delete(path, params={'force': True}).status_code == 200:
-                logging.debug("Team:{} delete successfully".format('u' + user_id))
+                logging.info("Team:{} delete successfully".format(team_name))
                 return True
-            else:
-                return False
+        else:
+            logging.info("Team:{} doesn't exist!".format(team_name))
+            return False
 
     def remove_user(self, user_id):
         """
@@ -82,10 +88,11 @@ class DceClient(requests.Session):
         result = self.get(path)
         if result.status_code == 200:
             if self.delete(path).status_code == 200:
-                logging.debug("User:{} delete successfully".format('u' + user_id))
+                logging.info("User:{} delete successfully".format('u' + user_id))
                 return True
-            else:
-                return False
+        else:
+            logging.info("User:{} doesn't exist!".format(user_id))
+            return False
 
     def remove_registry(self, registry_name):
         """
@@ -98,7 +105,8 @@ class DceClient(requests.Session):
         result = self.get(path)
         if result.status_code == 200:
             if self.delete(path).status_code == 200:
-                logging.debug("Registry:{} delete successfully".format(registry_name))
+                logging.info("Registry:{} delete successfully".format(registry_name))
                 return True
-            else:
-                return False
+        else:
+            logging.info("Registry:{} doesn't exist!".format(registry_name))
+            return False

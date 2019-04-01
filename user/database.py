@@ -14,9 +14,9 @@ from sqlalchemy import create_engine, MetaData, Column, BigInteger, String
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import sessionmaker
 
-LOG = getLogger(__name__)
+from user.config import DATABASE_URL
 
-DATABASE_URL = 'mysql+pymysql://root:O5l@+oDqxl@192.168.1.145:30791/cosmo_portal_ucs'
+LOG = getLogger(__name__)
 
 engine = create_engine(DATABASE_URL,
                        pool_recycle=3600,
