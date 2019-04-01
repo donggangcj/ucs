@@ -17,7 +17,7 @@ setup(
     long_description="The tool is aimed to clean the dirty data when develop and test the ucs portal project",
     license="MIT Licence",
 
-    url="https://github.com/LiangjunFeng/SICA",  # 项目相关文件地址，一般是github
+    url="https://github.com/donggangcj/ucs.git",  # 项目相关文件地址，一般是github
     author="GangDong",
     author_email="donggangcj@gmail.com",
 
