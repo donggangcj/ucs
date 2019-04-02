@@ -40,9 +40,9 @@ def _delete_team(user_id):
             logging.info("USER_TEAM:{} delete successfully".format(user_id))
 
 
-def _delte_tenant(cluster_id, tenant_name, team_name):
+def _delete_tenant(cluster_id, tenant_name, team_name):
     """
-    delte the team_tenant from t_ucs_team_tenant
+    delete the team_tenant from t_ucs_team_tenant
     :param cluster_id: dce host ip
     :param tenant_name: u+`team_name`
     :param team_name: user id from haier user center
