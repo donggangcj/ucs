@@ -90,7 +90,7 @@ def main(user_indentity):
     _delete_user(user_indentity)
     _delete_team(user_indentity)
     for cluster in get_cluster():
-        _delte_tenant(cluster.cluster_id, 'u' + user_indentity, user_indentity)
+        _delete_tenant(cluster.cluster_id, 'u' + user_indentity, user_indentity)
 
     logging.info('')
     logging.info("======UCS CLEANING SUCCESSFULLY======")
